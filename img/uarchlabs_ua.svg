@@ -1,0 +1,45 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#353f4a" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="traces" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M10 0 L10 20 L30 20 L30 40 L50 40 L50 60" fill="none" stroke="#353f4a" stroke-width="0.6"/>
+      <path d="M40 0 L40 10 L20 10 L20 30 L0 30" fill="none" stroke="#353f4a" stroke-width="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- background -->
+  <rect width="500" height="500" fill="#21272e"/>
+
+  <!-- grid overlay -->
+  <rect width="500" height="500" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- trace lines -->
+  <rect width="500" height="500" fill="url(#traces)" opacity="0.5"/>
+
+  <!-- subtle warm glow -->
+  <ellipse cx="280" cy="250" rx="200" ry="200" fill="#b84c25" opacity="0.05"/>
+
+  <!-- left accent bar — from the banner -->
+  <rect x="52" y="80" width="3" height="340" fill="#b84c25" opacity="0.7" rx="1"/>
+
+  <!-- u — light color -->
+  <text x="78" y="330"
+        font-family="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif"
+        font-size="260"
+        font-weight="700"
+        letter-spacing="-8"
+        fill="#e8ecf0">u</text>
+
+  <!-- A — orange -->
+  <text x="218" y="330"
+        font-family="-apple-system, BlinkMacSystemFont, Helvetica Neue, sans-serif"
+        font-size="260"
+        font-weight="700"
+        letter-spacing="-8"
+        fill="#d96b3f">A</text>
+
+  <!-- bottom rule — mirrors banner bottom bar -->
+  <rect x="0" y="460" width="500" height="8" fill="#353f4a"/>
+</svg>

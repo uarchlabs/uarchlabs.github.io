@@ -1,0 +1,68 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#353f4a" stroke-width="0.5"/>
+    </pattern>
+    <pattern id="traces" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M10 0 L10 20 L30 20 L30 40 L50 40 L50 60" fill="none" stroke="#353f4a" stroke-width="0.6"/>
+      <path d="M40 0 L40 10 L20 10 L20 30 L0 30" fill="none" stroke="#353f4a" stroke-width="0.6"/>
+    </pattern>
+    <clipPath id="circle-clip">
+      <circle cx="250" cy="250" r="250"/>
+    </clipPath>
+  </defs>
+
+  <!-- background -->
+  <rect width="500" height="500" fill="#21272e"/>
+
+  <!-- grid overlay -->
+  <rect width="500" height="500" fill="url(#grid)" opacity="0.6"/>
+
+  <!-- trace lines -->
+  <rect width="500" height="500" fill="url(#traces)" opacity="0.5"/>
+
+  <!-- subtle warm glow center -->
+  <ellipse cx="250" cy="250" rx="220" ry="220" fill="#b84c25" opacity="0.05"/>
+
+  <!-- logo mark — centered, scaled up ~3x from original 64x64 -->
+  <g transform="translate(118, 118)">
+    <!-- outer rounded square -->
+    <rect width="264" height="264" rx="48" fill="#2a3038"/>
+    <rect width="264" height="264" rx="48" fill="none" stroke="#b84c25" stroke-width="3" opacity="0.6"/>
+
+    <!-- inner grid detail — subtle background texture inside mark -->
+    <rect x="1" y="1" width="262" height="262" rx="47" fill="url(#grid)" opacity="0.4"/>
+
+    <!-- U-arch shape — scaled from M14 18 L14 36 Q14 50 22 50 L42 50 Q50 50 50 36 L50 18 -->
+    <!-- original was 36px wide, 32px tall inside 64px box -->
+    <!-- scaled ~3.4x: translate to center within 264px box -->
+    <path d="M58 74 L58 148 Q58 206 90 206 L174 206 Q206 206 206 148 L206 74"
+          stroke="#d96b3f" stroke-width="14" stroke-linecap="round" fill="none"/>
+
+    <!-- gate line across top -->
+    <line x1="33" y1="74" x2="231" y2="74" stroke="#8a97a6" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- center node -->
+    <circle cx="132" cy="172" r="16" fill="#b84c25"/>
+
+    <!-- pin marks on outer edge — top -->
+    <line x1="80"  y1="0"   x2="80"  y2="-12" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="132" y1="0"   x2="132" y2="-12" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="184" y1="0"   x2="184" y2="-12" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+
+    <!-- pin marks — bottom -->
+    <line x1="80"  y1="264" x2="80"  y2="276" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="132" y1="264" x2="132" y2="276" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="184" y1="264" x2="184" y2="276" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+
+    <!-- pin marks — left -->
+    <line x1="0"   y1="90"  x2="-12" y2="90"  stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="0"   y1="132" x2="-12" y2="132" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="0"   y1="174" x2="-12" y2="174" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+
+    <!-- pin marks — right -->
+    <line x1="264" y1="90"  x2="276" y2="90"  stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="264" y1="132" x2="276" y2="132" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+    <line x1="264" y1="174" x2="276" y2="174" stroke="#8a97a6" stroke-width="2.5" opacity="0.5"/>
+  </g>
+</svg>
