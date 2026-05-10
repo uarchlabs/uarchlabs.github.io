@@ -1,0 +1,259 @@
+---
+layout: default
+---
+<style>
+  /* ── Post header ── */
+  .post-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .post-series {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .post-series::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+  .post-title {
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+  .post-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  /* ── Post body ── */
+  .post-content {
+    max-width: 720px;
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .post-content h2 {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .post-content h2::before { content: "// "; color: var(--border); }
+
+  .post-content h3 {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    margin: 2rem 0 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .post-content h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin: 1.5rem 0 0.5rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .post-content p { margin-bottom: 1.25rem; }
+
+  .post-content ul,
+  .post-content ol {
+    margin: 0 0 1.25rem 1.5rem;
+  }
+  .post-content li { margin-bottom: 0.4rem; }
+
+  .post-content hr {
+    border: none;
+    border-top: 0.5px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  /* ── Inline code ── */
+  .post-content code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--surface);
+    color: var(--accent-bright);
+    padding: 0.15em 0.4em;
+    border-radius: 3px;
+    border: 0.5px solid var(--border);
+  }
+
+  /* ── Code blocks ── */
+  .post-content pre {
+    background: var(--bg-deep);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+    line-height: 1.55;
+  }
+  .post-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ── Tables ── */
+  .post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.75rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    overflow-x: auto;
+    display: block;
+  }
+  .post-content th {
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 600;
+    text-align: left;
+    padding: 0.5rem 0.85rem;
+    border: 0.5px solid var(--border);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .post-content td {
+    padding: 0.45rem 0.85rem;
+    border: 0.5px solid var(--border);
+    color: var(--muted);
+    vertical-align: top;
+  }
+  .post-content tr:nth-child(even) td { background: var(--bg-deep); }
+
+  /* ── Images ── */
+  .post-content img {
+    max-width: 100%;
+    height: auto;
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    margin: 1.5rem 0;
+  }
+
+  /* ── Blockquotes ── */
+  .post-content blockquote {
+    border-left: 2px solid var(--accent);
+    margin: 1.5rem 0;
+    padding: 0.75rem 1.25rem;
+    background: var(--surface);
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── References ── */
+  .post-content sup { font-size: 0.75em; }
+
+
+  /* ── Prev/Next nav ── */
+  .post-nav {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .post-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    max-width: 45%;
+    text-decoration: none;
+  }
+  .post-nav-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .post-nav-title {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+  .post-nav-link:hover .post-nav-title { color: var(--text); }
+  .post-nav-next { align-items: flex-end; text-align: right; }
+  .post-nav-empty { flex: 1; }
+
+  /* ── Bio footer ── */
+  .post-bio {
+    margin-top: 3rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 1.65;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+</style>
+
+<article>
+  <header class="post-header">
+    {% if page.series %}<span class="post-series">{{ page.series }}</span>{% endif %}
+    <h1 class="post-title">{{ page.title }}</h1>
+    <div class="post-meta">
+      {{ page.date | date: "%Y-%m-%d" }}{% if page.author %} — {{ page.author }}{% endif %}
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav">
+    {% if page.previous %}
+    <a class="post-nav-link post-nav-prev" href="{{ page.previous.url }}">
+      <span class="post-nav-label">← previous</span>
+      <span class="post-nav-title">{{ page.previous.title }}</span>
+    </a>
+    {% else %}
+    <span class="post-nav-empty"></span>
+    {% endif %}
+    {% if page.next %}
+    <a class="post-nav-link post-nav-next" href="{{ page.next.url }}">
+      <span class="post-nav-label">next →</span>
+      <span class="post-nav-title">{{ page.next.title }}</span>
+    </a>
+    {% endif %}
+  </nav>
+
+</article>
+
