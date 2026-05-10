@@ -5,46 +5,52 @@ permalink: /blog/
 ---
 <style>
   .blog-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
   }
   .blog-header h1 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 1.1rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-bright);
+    color: var(--accent);
     margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .blog-header h1::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
   }
   .blog-header p {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
     margin: 0;
   }
 
   .post-list { list-style: none; }
   .post-list li {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 0;
+    border-bottom: 0.5px solid var(--border);
     display: grid;
-    grid-template-columns: 9rem 1fr;
+    grid-template-columns: 8rem 1fr;
     gap: 1.5rem;
     align-items: baseline;
   }
   .post-date {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--text-muted);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
     letter-spacing: 0.04em;
-    padding-top: 0.15rem;
   }
-  .post-info {}
   .post-info .series-tag {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
+    font-family: var(--mono);
+    font-size: 10px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
@@ -52,24 +58,25 @@ permalink: /blog/
     display: block;
   }
   .post-info a {
-    font-family: 'IBM Plex Serif', Georgia, serif;
-    font-size: 1.05rem;
+    font-size: 14px;
     font-weight: 600;
-    color: var(--text-bright);
+    color: var(--text);
     line-height: 1.4;
     display: block;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.35rem;
+    text-decoration: none;
+    transition: color 0.15s;
   }
-  .post-info a:hover { color: var(--accent); text-decoration: none; }
+  .post-info a:hover { color: var(--accent-bright); }
   .post-excerpt {
-    font-size: 0.88rem;
-    color: var(--text-muted);
+    font-size: 12px;
+    color: var(--muted);
     line-height: 1.6;
   }
 </style>
 
 <div class="blog-header">
-  <h1>Blog</h1>
+  <h1>// blog</h1>
   <p>Design decisions, AI-assisted co-design records, and architectural rationale from the Pacino project.</p>
 </div>
 

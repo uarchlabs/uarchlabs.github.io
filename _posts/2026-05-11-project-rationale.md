@@ -2,7 +2,7 @@
 layout: post
 title: "Project Rationale"
 author: Jeff Nye
-date: 2026-05-09
+date: 2026-05-11
 series: Pacino and uarchlabs
 excerpt: "The emergence of LLMs raises a practical question for high performance large-scale processor development: can a standards-compliant, competitively performant design be built by a very small team on a small budget?"
 copyright: "Copyright 2026 Jeff Nye"
