@@ -3,8 +3,6 @@ layout: post
 title: "What RVA23 Actually Asks of a Decoder"
 author: Jeff Nye
 date: 2026-05-18
-series: RVA23 Decoding
-excerpt: "RVA23S64 mandates a large and non-trivial extension set. This post examines what that means for the decoder specifically."
 copyright: "Copyright 2026 Jeff Nye"
 ---
 # BLOG_decoder_1_rva23_profile
@@ -12,12 +10,9 @@ copyright: "Copyright 2026 Jeff Nye"
 [//]: # (header: ```)
 [//]: # (header:  FILE:    BLOG_decoder_1_rva23_profile)
 [//]: # (header:  STATUS:  unpublished)
-[//]: # (header:  UPDATED: 2026-xx-xx)
+[//]: # (header:  UPDATED: 2026.05.14)
 [//]: # (header:  CONTACT: uarchlabs@gmail.com)
 [//]: # (header: ```)
-# Navigation
-
-TODO: add the before and after links
 
 # What RVA23 Actually Asks of a Decoder
 
