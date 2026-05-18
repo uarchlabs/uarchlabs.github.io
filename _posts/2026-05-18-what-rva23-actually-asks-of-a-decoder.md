@@ -3,9 +3,10 @@ layout: post
 title: "What RVA23 Actually Asks of a Decoder"
 author: Jeff Nye
 date: 2026-05-18
+series: RVA23 Support
+excerpt: "The mandatory extension list for RVA23S64 is not short. A discussion of the profile and decoding nuances."
 copyright: "Copyright 2026 Jeff Nye"
 ---
-# BLOG_decoder_1_rva23_profile
 
 [//]: # (header: ```)
 [//]: # (header:  FILE:    BLOG_decoder_1_rva23_profile)
