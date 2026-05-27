@@ -4,7 +4,7 @@ title: "Scalar Foundation to Vector ALU"
 author: Jeff Nye
 date: 2026-05-25
 series: RVA23 Support
-excerpt: "from the first scalar instruction through 168 vector ALU enum entries and 453 passing tests"
+excerpt: "From the first scalar instruction through 168 vector ALU enum entries and 453 passing tests"
 copyright: "Copyright 2026 Jeff Nye"
 ---
 
@@ -303,7 +303,7 @@ become an operational constraint.
 # References
 
 ```
-[1] INSERT LINK TO PREVIOUS POST WHEN HOSTED
+[1] https://uarchlabs.github.io/blog/what-rva23-actually-asks-of-a-decoder
 
 [2] riscv-opcodes
     https://github.com/riscv/riscv-opcodes
