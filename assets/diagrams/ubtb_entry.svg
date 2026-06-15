@@ -1,5 +1,5 @@
 <svg viewBox="0 0 760 210" xmlns="http://www.w3.org/2000/svg">
-
+  <rect width="100%" height="100%" fill="white"/>
   <!-- Title -->
   <text x="380" y="17" text-anchor="middle" font-family="monospace" font-size="13" font-weight="bold" fill="#111">uBTB Entry Fields  (ubtb_entry_t,  66b total)</text>
   <text x="380" y="31" text-anchor="middle" font-family="monospace" font-size="10" fill="#666">MSB                                                                                               LSB</text>
