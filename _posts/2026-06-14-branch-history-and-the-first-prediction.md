@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "Branch History and the First Prediction"
 author: Jeff Nye
@@ -6,16 +9,6 @@ date: 2026-06-14
 series: "BPU Series"
 excerpt: "The history module is the centralized owner of all branch history state."
 copyright: "Copyright 2026 Jeff Nye"
----
-
-<!--
-*This is part 2 of a series on branch predictor co-design.
-[Part 1: Cluster Architecture](BLOG_bpu_1_cluster_arch.md) |
-[Part 2: History and uBTB](BLOG_bpu_2_history_ubtb.md) |
-[Part 3: Loop Predictor](BLOG_bpu_3_loop_pred.md) |
-[Part 4: When the Tools Fail](BLOG_bpu_4_limits.md)*
--->
-
 ---
 
 ## The s1 Prediction Infrastructure

@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "What RVA23 Actually Asks of a Decoder"
 author: Jeff Nye
@@ -15,7 +18,7 @@ copyright: "Copyright 2026 Jeff Nye"
 [//]: # (header:  CONTACT: uarchlabs@gmail.com)
 [//]: # (header: ```)
 
-# What RVA23 Actually Asks of a Decoder
+## RVA23 Decoder Design
 
 There is a version of RISC-V processor design that sounds straightforward:
 pick the extensions you need, implement them, ship. The modular ISA 

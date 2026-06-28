@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "Project Rationale"
 author: Jeff Nye
@@ -7,15 +10,6 @@ series: Pacino and uarchlabs
 excerpt: "The emergence of LLMs raises a practical question for high performance large-scale processor development: can a standards-compliant, competitively performant design be built by a very small team on a small budget?"
 copyright: "Copyright 2026 Jeff Nye"
 ---
-
-[//]: # (header: ```)
-[//]: # (header:  FILE:    BLOG_introduction.md)
-[//]: # (header:  STATUS:  unpublished)
-[//]: # (header:  UPDATED: 2026-xx-xx)
-[//]: # (header:  CONTACT: uarchlabs@gmail.com)
-[//]: # (header: ```)
-
-# Project Rationale
 
 The emergence of LLMs raises a practical question for high performance
 large-scale processor development: can a standards-compliant, competitively

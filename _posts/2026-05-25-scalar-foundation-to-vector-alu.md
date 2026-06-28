@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "Scalar Foundation to Vector ALU"
 author: Jeff Nye
@@ -15,7 +18,7 @@ copyright: "Copyright 2026 Jeff Nye"
 [//]: # (header:  CONTACT: uarchlabs@gmail.com)
 [//]: # (header: ```)
 
-# Building the RVA23 Decoder: Scalar Foundation to Vector ALU
+## Building the RVA23 Decoder: Scalar Foundation to Vector ALU
 
 The previous post [1] described what an RVA23 decoder needs to do: eight
 instructions per cycle, complete extension coverage, dual-packet output

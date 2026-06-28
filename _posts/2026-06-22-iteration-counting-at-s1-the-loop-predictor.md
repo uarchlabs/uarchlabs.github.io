@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "Iteration Counting at s1: The Loop Predictor"
 author: Jeff Nye
@@ -6,24 +9,6 @@ date: 2026-06-22
 series: "BPU Series"
 excerpt: "The loop predictor is the second s1-stage predictor in the branch predictor (BP) cluster"
 copyright: "Copyright 2026 Jeff Nye"
----
-<!-- SPDX-License-Identifier: CC-BY-4.0                        -->
-<!-- Copyright (c) 2026 Jeff Nye, uarchlabs.com                -->
-<!-- SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com -->
----
-title: "Iteration Counting at s1: The Loop Predictor"
-author: Jeff Nye
-date: 2026-03-31
-copyright: "Copyright 2026 Jeff Nye"
----
-
-<!--
-*This is part 3 of a series on branch predictor co-design.
-[Part 1: Cluster Architecture](BLOG_bpu_1_cluster_arch.md) |
-[Part 2: History and uBTB](BLOG_bpu_2_history_ubtb.md) |
-[Part 3: Loop Predictor](BLOG_bpu_3_loop_pred.md) |
-[Part 4: When the Tools Fail](BLOG_bpu_4_limits.md)*
--->
 
 ---
 

@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "Memory disambiguation and pre-decode"
 author: Jeff Nye
@@ -8,14 +11,7 @@ excerpt: "Last of the decoder track covering memory disambiguation, pre-decode a
 copyright: "Copyright 2026 Jeff Nye"
 ---
 
-[//]: # (header: ```)
-[//]: # (header:  FILE:    BLOG_decoder_3_memory_to_closure.md)
-[//]: # (header:  STATUS:  unpublished)
-[//]: # (header:  UPDATED: 2026.05.14)
-[//]: # (header:  CONTACT: uarchlabs@gmail.com)
-[//]: # (header: ```)
-
-# Memory disambiguation, pre-decode and next steps
+## Disambiguation, pre-decode and next steps
 
 The previous post described the systematic vector ALU disambiguation work
 that took the decoder from a scalar foundation to 453 passing tests and

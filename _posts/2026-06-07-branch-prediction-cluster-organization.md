@@ -1,4 +1,7 @@
 ---
+# SPDX-License-Identifier: CC-BY-4.0 
+# Copyright (c) 2026 Jeff Nye, uarchlabs.com 
+# SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com
 layout: post
 title: "Branch Prediction Cluster Organization"
 author: Jeff Nye
@@ -7,31 +10,6 @@ series: "BPU Series"
 excerpt: "Building a Seven-Predictor Branch Prediction Cluster for RVA23"
 copyright: "Copyright 2026 Jeff Nye"
 ---
-
-[//]: # (header: ```)
-[//]: # (header:  FILE:    BLOG_bpu_1_cluster_arch)
-[//]: # (header:  STATUS:  unpublished)
-[//]: # (header:  UPDATED: 2026-xx-xx)
-[//]: # (header:  CONTACT: uarchlabs@gmail.com)
-[//]: # (header: ```)
-
-<!--
----
-title: "Building a Seven-Predictor Branch Prediction Cluster for RVA23"
-author: Jeff Nye
-date: 2026-03-28
-copyright: "Copyright 2026 Jeff Nye"
-
----
-
-*This is part 1 of a series on branch predictor co-design.*
-- [Part 1: Cluster Architecture](BLOG_bpu_1_cluster_arch.md)
-- [Part 2: History and uBTB](BLOG_bpu_2_history_ubtb.md)
-- [Part 3: Loop Predictor](BLOG_bpu_3_loop_pred.md)
-- [Part 4: When the Tools Fail](BLOG_bpu_4_limits.md)
-
----
--->
 
 ## A New Aspect of Co-Design
 
