@@ -4,7 +4,7 @@ title: "TAGE -- Architecture and the Decomposition Problem"
 author: Jeff Nye
 date: 2026-07-05
 series: "BPU Series"
-excerpt: "The TAGE sessions introduced a different class of problem, the architecture of structure"
+excerpt: "The TAGE sessions introduced a different class of problem, the architecture of structure."
 copyright: "Copyright 2026 Jeff Nye"
 ---
 <!-- SPDX-License-Identifier: CC-BY-4.0                        -->
