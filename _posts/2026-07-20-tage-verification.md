@@ -11,14 +11,14 @@ copyright: "Copyright 2026 Jeff Nye"
 <!-- Copyright (c) 2026 Jeff Nye, uarchlabs.com                -->
 <!-- SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com -->
 
-*This is part of a series on branch predictor co-design.
-[Part 1: Cluster Architecture](BLOG_bpu_1_cluster_arch.md) |
-[Part 2: History and uBTB](BLOG_bpu_2_history_ubtb.md) |
-[Part 3: Loop Predictor](BLOG_bpu_3_loop_pred.md) |
-[Part 4: When the Tools Fail](BLOG_bpu_4_limits.md) |
-[Part 5: TAGE -- Architecture and the Decomposition Problem](BLOG_bpu_5_tage_arch.md) |
-[Part 6: TAGE -- Implementation](BLOG_bpu_6_tage_impl.md) |
-[Part 7: TAGE -- Validation](BLOG_bpu_7_tage_validation.md)*
+<!-- *This is part of a series on branch predictor co-design. -->
+<!-- [Part 1: Cluster Architecture](BLOG_bpu_1_cluster_arch.md) | -->
+<!-- [Part 2: History and uBTB](BLOG_bpu_2_history_ubtb.md) | -->
+<!-- [Part 3: Loop Predictor](BLOG_bpu_3_loop_pred.md) | -->
+<!-- [Part 4: When the Tools Fail](BLOG_bpu_4_limits.md) | -->
+<!-- [Part 5: TAGE -- Architecture and the Decomposition Problem](BLOG_bpu_5_tage_arch.md) | -->
+<!-- [Part 6: TAGE -- Implementation](BLOG_bpu_6_tage_impl.md) | -->
+<!-- [Part 7: TAGE -- Validation](BLOG_bpu_7_tage_validation.md)* -->
 
 ---
 
