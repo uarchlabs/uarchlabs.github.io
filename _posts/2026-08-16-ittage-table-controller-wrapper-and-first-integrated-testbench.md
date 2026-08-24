@@ -10,7 +10,7 @@ copyright: "Copyright 2026 Jeff Nye"
 <!-- SPDX-License-Identifier: CC-BY-4.0                        -->
 <!-- Copyright (c) 2026 Jeff Nye, uarchlabs.com                -->
 <!-- SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com -->
-<!-- # Blog Article — RVA23 Co-Design
+<!-- # Blog Article — RVA23 Co-Design -->
 
 <!-- ``` -->
 <!-- TITLE: "ITTAGE -- Table, Controller, Wrapper, and First Integrated Testbench" -->
