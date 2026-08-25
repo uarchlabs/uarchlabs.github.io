@@ -9,6 +9,8 @@ Built with plain HTML/CSS. No build step required.
 Add a card to `index.html` in the projects section when a new 
 uarchlabs repo goes live.
 
+TODO: add cachegen on its next release
+
 ## To test local jekyll changes
 sudo bundle exec jekyll serve --port 4001
 
