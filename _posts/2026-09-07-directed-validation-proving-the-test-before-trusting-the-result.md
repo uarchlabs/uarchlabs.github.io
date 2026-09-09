@@ -4,7 +4,7 @@ title: "UPDATED: Directed Validation: Proving the Test Before Trusting the Resul
 author: Jeff Nye
 date: 2026-09-07
 series: "BPU Series"
-excerpt: "A methodology that proves tests by breaking the design, verifying the test, then restoring the design, all done the IA task"
+excerpt: "A methodology that proves tests by breaking the design, verifying the test, then restoring the design, within the IA task"
 copyright: "Copyright 2026 Jeff Nye"
 ---
 <!-- SPDX-License-Identifier: CC-BY-4.0                        -->
