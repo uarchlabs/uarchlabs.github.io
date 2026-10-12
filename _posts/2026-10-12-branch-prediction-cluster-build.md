@@ -11,14 +11,14 @@ copyright: "Copyright 2026 Jeff Nye"
 <!-- Copyright (c) 2026 Jeff Nye, uarchlabs.com                -->
 <!-- SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com> -->
 
-```
-TITLE:     "The Branch Prediction Cluster: Built and Not Yet Run"
-FILE:      BLOG_bpu_19_bp_cluster_build.md
-AUTHOR:    Jeff Nye
-DATE:      2026-09-22
-STATUS:    REVIEW BEFORE POSTING
-COPYRIGHT: "Copyright 2026 Jeff Nye"
-```
+<!-- ``` -->
+<!-- TITLE:     "The Branch Prediction Cluster: Built and Not Yet Run" -->
+<!-- FILE:      BLOG_bpu_19_bp_cluster_build.md -->
+<!-- AUTHOR:    Jeff Nye -->
+<!-- DATE:      2026-09-22 -->
+<!-- STATUS:    REVIEW BEFORE POSTING -->
+<!-- COPYRIGHT: "Copyright 2026 Jeff Nye" -->
+<!-- ``` -->
 
 <!--
 ---
