@@ -1,515 +1,512 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="uarchlabs — open source AI microprocessor co-design. Building processors and design flows in the open.">
-  <title>uarchlabs</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:           #21272e;
-      --bg-deep:      #1c2128;
-      --surface:      #2a3038;
-      --border:       #353f4a;
-      --accent:       #b84c25;
-      --accent-bright:#d96b3f;
-      --text:         #e8ecf0;
-      --muted:        #8a97a6;
-      --mono:         monospace;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 32px;
-      background: var(--bg-deep);
-      border-bottom: 0.5px solid var(--border);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-
-    .nav-mark {
-      width: 26px;
-      height: 26px;
-      border-radius: 5px;
-      background: var(--surface);
-      border: 0.5px solid var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .nav-mark svg { display: block; }
-
-    .nav-wordmark {
-      font-family: var(--mono);
-      font-size: 14px;
-      color: var(--text);
-      letter-spacing: 0.04em;
-    }
-
-    .nav-wordmark span { color: var(--accent-bright); }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--muted);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color 0.15s;
-    }
-
-    .nav-links a:hover { color: var(--text); }
-
-    .nav-gh {
-      border: 0.5px solid var(--border) !important;
-      border-radius: 3px;
-      padding: 5px 12px;
-    }
-
-    .nav-gh:hover {
-      border-color: var(--accent) !important;
-      color: var(--accent-bright) !important;
-    }
-
-    /* ── BANNER ── */
-    .banner-wrap {
-      width: 100%;
-      border-bottom: 0.5px solid var(--border);
-      overflow: hidden;
-    }
-
-    .banner-wrap svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    /* ── MAIN ── */
-    main {
-      flex: 1;
-      max-width: 860px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 40px 32px 60px;
-    }
-
-    /* ── SECTION LABEL ── */
-    .section-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--accent);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 0.5px;
-      background: var(--border);
-    }
-
-    /* ── PROJECT CARD ── */
-    .project-card {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: 6px;
-      padding: 20px 22px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: start;
-      transition: border-color 0.15s;
-      text-decoration: none;
-    }
-
-    .project-card:hover { border-color: var(--accent); }
-
-    .proj-name {
-      font-family: var(--mono);
-      font-size: 15px;
-      color: var(--text);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .proj-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .proj-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 14px;
-      padding-left: 17px;
-    }
-
-    .proj-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      padding-left: 17px;
-    }
-
-    .tag {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      border: 0.5px solid var(--border);
-      border-radius: 3px;
-      padding: 2px 8px;
-    }
-
-    .tag-accent {
-      color: var(--accent-bright);
-      border-color: #5a2d16;
-      background: #2e1a10;
-    }
-
-    .proj-meta {
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 8px;
-    }
-
-    .status-badge {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--accent-bright);
-      background: #2e1a10;
-      border: 0.5px solid #5a2d16;
-      border-radius: 3px;
-      padding: 3px 10px;
-      white-space: nowrap;
-    }
-
-    .proj-links {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .proj-link {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--muted);
-      text-decoration: none;
-      text-align: right;
-      transition: color 0.15s;
-    }
-
-    .proj-link:hover { color: var(--accent-bright); }
-
-    /* ── PLACEHOLDER CARD ── */
-    .placeholder-card {
-      background: var(--bg-deep);
-      border: 0.5px dashed var(--border);
-      border-radius: 6px;
-      padding: 18px 22px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .placeholder-plus {
-      font-family: var(--mono);
-      font-size: 18px;
-      color: var(--border);
-      line-height: 1;
-    }
-
-    .placeholder-text {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: #404a55;
-    }
-
-    /* ── ABOUT GRID ── */
-    .about {
-      margin-top: 40px;
-      padding-top: 24px;
-      border-top: 0.5px solid var(--border);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .about-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .about-val {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      border-top: 0.5px solid var(--border);
-      padding: 14px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--bg-deep);
-    }
-
-    .footer-text {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: #404a55;
-    }
-
-    .footer-link {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: #404a55;
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer-link:hover { color: var(--muted); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 600px) {
-      nav { padding: 12px 16px; }
-      .nav-links { gap: 14px; }
-      main { padding: 28px 16px 48px; }
-      .project-card { grid-template-columns: 1fr; }
-      .proj-meta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
-      .about { grid-template-columns: 1fr; }
-      footer { padding: 12px 16px; flex-direction: column; gap: 6px; text-align: center; }
-    }
-  </style>
-  <script data-goatcounter="https://uarchlabs.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>uarchlabs workbench</title>
+<meta name="description" content="Pacino design resources: the frontend theory of operation, browser waveforms for 24 frontend demonstrations, the IA task record and the uarchlabs blog.">
+<link rel="alternate" type="application/atom+xml" title="uarchlabs blog" href="/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#21272e}
+a{color:#e8ecf0;text-decoration:none}
+a:hover{color:#e8845a}
+</style>
+<script data-goatcounter="https://uarchlabs.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
+<div style="background: #21272e; color: #e8ecf0; font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh">
 
-  <!-- NAV -->
-  <nav>
-    <a class="nav-logo" href="/">
-      <div class="nav-mark">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.5 3.5 L3.5 8.5 Q3.5 12.5 6 12.5 L10 12.5 Q12.5 12.5 12.5 8.5 L12.5 3.5" stroke="#d96b3f" stroke-width="1.6" stroke-linecap="round"/>
-          <line x1="1" y1="3.5" x2="15" y2="3.5" stroke="#8a97a6" stroke-width="1.2" stroke-linecap="round"/>
-          <circle cx="8" cy="10" r="1.5" fill="#b84c25"/>
-        </svg>
-      </div>
-      <span class="nav-wordmark">u<span>arch</span>labs</span>
-    </a>
-    <div class="nav-links">
-      <a href="#projects">projects</a>
-      <a href="#about">about</a>
-      <a href="/blog/">blog</a>
-      <a href="https://uarchlabs.github.io/pacino/">pacino</a>
-      <a href="https://github.com/uarchlabs" target="_blank" rel="noopener" class="nav-gh">github ↗</a>
-    </div>
-  </nav>
+<nav aria-label="Site" style="background: #1c2128; border-bottom: 1px solid #353f4a">
+<div style="max-width: 1080px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between">
+<a href="#top" style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; letter-spacing: 0.02em">uarchlabs<span style="color: #e8845a"> / workbench</span></a>
+<div style="display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+<a href="#projects" style="color: #a9b4c0">projects</a>
+<a href="#operations" style="color: #a9b4c0">operations</a>
+<a href="https://uarchlabs.github.io/pacino/" style="color: #a9b4c0">docs</a>
+<a href="#sessions" style="color: #a9b4c0">task browser</a>
+<a href="https://uarchlabs.github.io/blog/" style="color: #a9b4c0">blog</a>
+<a href="https://uarchlabs.com/" style="color: #a9b4c0">uarchlabs.com ↗</a>
+<a href="https://github.com/uarchlabs" style="color: #e8ecf0; border: 1px solid #4a5563; border-radius: 4px; padding: 5px 12px">github ↗</a>
+</div>
+</div>
+</nav>
 
-  <!-- BANNER -->
-  <div class="banner-wrap">
-    <svg width="1200" height="400" viewBox="0 0 1200 400" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-          <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#353f4a" stroke-width="0.5"/>
-        </pattern>
-        <pattern id="traces" width="120" height="120" patternUnits="userSpaceOnUse">
-          <path d="M20 0 L20 40 L60 40 L60 80 L100 80 L100 120" fill="none" stroke="#353f4a" stroke-width="0.8"/>
-          <path d="M80 0 L80 20 L40 20 L40 60 L0 60" fill="none" stroke="#353f4a" stroke-width="0.8"/>
-        </pattern>
-      </defs>
-      <rect width="1200" height="400" fill="#21272e"/>
-      <rect width="1200" height="400" fill="url(#grid)" opacity="0.6"/>
-      <rect width="1200" height="400" fill="url(#traces)" opacity="0.5"/>
-      <ellipse cx="900" cy="200" rx="380" ry="260" fill="#b84c25" opacity="0.06"/>
-      <rect x="80" y="60" width="2" height="280" fill="#b84c25" opacity="0.8" rx="1"/>
-      <g transform="translate(112, 148)">
-        <rect width="64" height="64" rx="12" fill="#353f4a"/>
-        <rect width="64" height="64" rx="12" fill="none" stroke="#b84c25" stroke-width="1" opacity="0.5"/>
-        <path d="M14 18 L14 36 Q14 50 22 50 L42 50 Q50 50 50 36 L50 18" stroke="#d96b3f" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-        <line x1="8" y1="18" x2="56" y2="18" stroke="#8a97a6" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="32" cy="42" r="4" fill="#b84c25"/>
-      </g>
-      <text x="196" y="186" font-family="-apple-system,sans-serif" font-size="56" font-weight="700" letter-spacing="-2" fill="#e8ecf0">u</text>
-      <text x="228" y="186" font-family="-apple-system,sans-serif" font-size="56" font-weight="700" letter-spacing="-2" fill="#d96b3f">arch</text>
-      <text x="376" y="186" font-family="-apple-system,sans-serif" font-size="56" font-weight="700" letter-spacing="-2" fill="#e8ecf0">labs</text>
-      <text x="196" y="218" font-family="-apple-system,sans-serif" font-size="15" font-weight="400" letter-spacing="0.5" fill="#8a97a6">AI MICROPROCESSOR CO-DESIGN · OPEN SOURCE</text>
-      <line x1="196" y1="238" x2="580" y2="238" stroke="#353f4a" stroke-width="1"/>
-      <g transform="translate(196, 260)">
-        <circle cx="6" cy="6" r="3" fill="#b84c25"/>
-        <text x="18" y="10" font-family="-apple-system,sans-serif" font-size="13" font-weight="500" fill="#e8ecf0">Open RTL</text>
-        <text x="18" y="28" font-family="-apple-system,sans-serif" font-size="12" fill="#8a97a6">Synthesizable, forkable, yours</text>
-      </g>
-      <g transform="translate(196, 308)">
-        <circle cx="6" cy="6" r="3" fill="#b84c25"/>
-        <text x="18" y="10" font-family="-apple-system,sans-serif" font-size="13" font-weight="500" fill="#e8ecf0">AI co-design methods</text>
-        <text x="18" y="28" font-family="-apple-system,sans-serif" font-size="12" fill="#8a97a6">Prompts, loops, and rationale — documented</text>
-      </g>
-      <g transform="translate(740, 80)" opacity="0.85">
-        <rect x="0" y="0" width="360" height="240" rx="6" fill="none" stroke="#353f4a" stroke-width="1.5"/>
-        <rect x="100" y="60" width="160" height="120" rx="4" fill="#353f4a" stroke="#b84c25" stroke-width="1"/>
-        <text x="180" y="116" font-family="monospace" font-size="11" fill="#d96b3f" text-anchor="middle" font-weight="500">CORE</text>
-        <text x="180" y="132" font-family="monospace" font-size="9" fill="#8a97a6" text-anchor="middle">AI co-designed</text>
-        <rect x="14" y="14" width="70" height="40" rx="3" fill="#353f4a" stroke="#8a97a6" stroke-width="0.5"/>
-        <text x="49" y="37" font-family="monospace" font-size="9" fill="#8a97a6" text-anchor="middle">I-CACHE</text>
-        <rect x="276" y="14" width="70" height="40" rx="3" fill="#353f4a" stroke="#8a97a6" stroke-width="0.5"/>
-        <text x="311" y="37" font-family="monospace" font-size="9" fill="#8a97a6" text-anchor="middle">D-CACHE</text>
-        <rect x="110" y="194" width="140" height="36" rx="3" fill="#353f4a" stroke="#8a97a6" stroke-width="0.5"/>
-        <text x="180" y="215" font-family="monospace" font-size="9" fill="#8a97a6" text-anchor="middle">MEM CTRL</text>
-        <rect x="14" y="80" width="50" height="80" rx="3" fill="#353f4a" stroke="#8a97a6" stroke-width="0.5"/>
-        <text x="39" y="120" font-family="monospace" font-size="8" fill="#8a97a6" text-anchor="middle">I/O</text>
-        <rect x="296" y="80" width="50" height="80" rx="3" fill="#353f4a" stroke="#8a97a6" stroke-width="0.5"/>
-        <text x="321" y="120" font-family="monospace" font-size="8" fill="#8a97a6" text-anchor="middle">I/O</text>
-        <line x1="84" y1="34" x2="100" y2="90" stroke="#353f4a" stroke-width="1" stroke-dasharray="3,2"/>
-        <line x1="276" y1="34" x2="260" y2="90" stroke="#353f4a" stroke-width="1" stroke-dasharray="3,2"/>
-        <line x1="64" y1="120" x2="100" y2="120" stroke="#353f4a" stroke-width="1" stroke-dasharray="3,2"/>
-        <line x1="296" y1="120" x2="260" y2="120" stroke="#353f4a" stroke-width="1" stroke-dasharray="3,2"/>
-        <line x1="180" y1="180" x2="180" y2="194" stroke="#b84c25" stroke-width="1" stroke-dasharray="3,2" opacity="0.7"/>
-        <line x1="14" y1="186" x2="346" y2="186" stroke="#353f4a" stroke-width="1"/>
-        <circle cx="110" cy="186" r="2.5" fill="#8a97a6" opacity="0.6"/>
-        <circle cx="250" cy="186" r="2.5" fill="#8a97a6" opacity="0.6"/>
-        <line x1="30" y1="0" x2="30" y2="-8" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="60" y1="0" x2="60" y2="-8" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="90" y1="0" x2="90" y2="-8" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="270" y1="0" x2="270" y2="-8" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="300" y1="0" x2="300" y2="-8" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="330" y1="0" x2="330" y2="-8" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="30" y1="240" x2="30" y2="248" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="60" y1="240" x2="60" y2="248" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="300" y1="240" x2="300" y2="248" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="330" y1="240" x2="330" y2="248" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="0" y1="100" x2="-8" y2="100" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="0" y1="140" x2="-8" y2="140" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="360" y1="100" x2="368" y2="100" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-        <line x1="360" y1="140" x2="368" y2="140" stroke="#8a97a6" stroke-width="1" opacity="0.5"/>
-      </g>
-      <rect x="0" y="380" width="1200" height="20" fill="#353f4a"/>
-      <text x="80" y="394" font-family="monospace" font-size="10" fill="#8a97a6">uarchlabs.github.io</text>
-      <text x="1120" y="394" font-family="monospace" font-size="10" fill="#8a97a6" text-anchor="end">open source · 2026</text>
-    </svg>
-  </div>
+<main id="top" style="max-width: 1080px; margin: 0 auto; padding: 56px 24px 72px; display: flex; flex-direction: column; gap: 64px">
 
-  <!-- MAIN CONTENT -->
-  <main>
+<header style="display: flex; flex-direction: column; gap: 20px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">UARCHLABS::PACINO</div>
+<h1 style="margin: 0; font-size: 44px; line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; max-width: 820px">Pacino Design Resources</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #a9b4c0; max-width: 700px">Pacino specifications, waveforms and theory of operation</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px">
+<div id="trk-frontend_rtl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 7px 12px; border-radius: 4px; background: #2a3038; border: 1px solid #353f4a"><span class="mk" style="color: #7fc59a">●</span> <span>pacino frontend RTL: </span><span class="st">complete</span></div>
+<a id="trk-docs" href="https://uarchlabs.github.io/pacino/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 7px 12px; border-radius: 4px; background: #2a3038; border: 1px solid #353f4a"><span class="mk" style="color: #e8845a">▶</span> specifications</a>
+<div id="trk-performance" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 7px 12px; border-radius: 4px; background: #2a3038; border: 1px solid #353f4a"><span class="mk" style="color: #e8845a">▶</span> <span>performance analysis: </span><span class="st">in progress</span></div>
+<div id="trk-physical_design" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 7px 12px; border-radius: 4px; background: #2a3038; border: 1px solid #353f4a"><span class="mk" style="color: #e8845a">▶</span> <span>physical design: </span><span class="st">in progress</span></div>
+</div>
+</header>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="section-label">// projects</div>
+<section id="specs" aria-labelledby="fs" style="display: flex; flex-direction: column; gap: 18px">
+<h2 id="fs" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// frontend specifications</h2>
+<div style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; padding: 26px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 620px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a9b4c0">release 01 · 2026-11</div>
+<h3 style="margin: 0; font-size: 24px; font-weight: 600">Detailed Specifications - Pacino Frontend</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #c4ccd5">Planning documents and design decisions</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+<a href="https://uarchlabs.github.io/pacino/frontend/overview/" style="padding: 9px 13px; border-radius: 4px; background: #e8845a; color: #161a20; font-weight: 600">read the specifications</a>
+</div>
+</div>
+</div>
+</section>
 
-      <div class="project-card">
-        <div>
-          <div class="proj-name">
-            <span class="proj-dot"></span>
-            pacino
-          </div>
-          <div class="proj-desc">
-            Out-of-order RVA23 RISC-V processor — design flow and RTL.
-            The uarchLabs co-design flow is currently tightly coupled to RVA23-based microarchitectures like pacino.
-            As the uarchlabs portfolio grows, the flow will be abstracted into a standalone tool.
-          </div>
-          <div class="proj-tags">
-            <span class="tag tag-accent">active</span>
-            <span class="tag">RISC-V</span>
-            <span class="tag">RVA23</span>
-            <span class="tag">out-of-order</span>
-            <span class="tag">SystemVerilog</span>
-            <span class="tag">open source</span>
-          </div>
-        </div>
-        <div class="proj-meta">
-          <span class="status-badge">● active</span>
-          <div class="proj-links">
-            <a class="proj-link" href="https://github.com/uarchlabs/pacino" target="_blank" rel="noopener">repo ↗</a>
-            <a class="proj-link" href="https://uarchlabs.github.io/pacino" target="_blank" rel="noopener">docs ↗</a>
-          </div>
-        </div>
-      </div>
+<section id="operations" aria-labelledby="wv" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="wv" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// frontend operations</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #c4ccd5">Pacino Frontend theory of operation and waveforms, immediate access from a browser.</p>
+<div style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; overflow: auto; max-height: 415px">
+<table style="width: 100%; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">FD</th>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">Demo</th>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">What it shows</th>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">Waveform</th>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-01</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Reset and init</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Reset and SRAM initialization</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd01_reset_init.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd01_reset_init.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd01_reset_init/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-02</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Steady state</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Steady-state prediction and fetch</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd02_steady.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd02_steady.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd02_steady/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-03</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Two branches <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Two branches in one prediction block</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd03_two_branch.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd03_two_branch.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd03_two_branch/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-04</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">p2 override</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">An FTB hit at p2 corrects a uBTB miss</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd04_p2_override.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd04_p2_override.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd04_p2_override/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-05</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">p3 override</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">The statistical corrector overrides at p3</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd05_p3_override.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd05_p3_override.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd05_p3_override/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-06</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Loop predictor</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Loop trip count learned and the exit predicted</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd06_loop_pred.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd06_loop_pred.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd06_loop_pred/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-07</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Calls and returns</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Return address stack push and pop</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd07_calls_returns.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd07_calls_returns.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd07_calls_returns/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-08</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Indirect jump</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">ITTAGE predicts an indirect target</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd08_indirect.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd08_indirect.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd08_indirect/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-09</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">TAGE</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Provider, allocation and use_alt_on_na</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd09_tage.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd09_tage.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd09_tage/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-10</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Predecode redirect</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Predecode corrects the prediction</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd10_pd_redirect.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd10_pd_redirect.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd10_pd_redirect/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-11</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Backend mispredict</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Redirect from the backend after a mispredict</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd11_be_mispredict.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd11_be_mispredict.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd11_be_mispredict/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-12</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Predictor training</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Updates routed by branch type; the single-ported FTB</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd12_training.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd12_training.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd12_training/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-13</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">L1I</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Hit, miss and MSHR merge</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd13_l1i.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd13_l1i.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd13_l1i/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-14</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Translation</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Sv39 walk, Sv39x4 nested walk and Svadu CAS</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd14_translation.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd14_translation.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd14_translation/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-15</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Fetch faults</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Page, access and guest-page fetch faults</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd15_faults.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd15_faults.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd15_faults/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-16</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Page crossing</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">A prediction block crossing a page</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd16_page_cross.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd16_page_cross.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd16_page_cross/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-17</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Compressed code</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Compressed and unaligned code</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd17_rvc.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd17_rvc.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd17_rvc/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-18</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Uncached fetch</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Fetch from an uncached region</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd18_uncached.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd18_uncached.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd18_uncached/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-19</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">FENCE.I and cbo.inval</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Instruction cache maintenance</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd19_fencei_cbo.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd19_fencei_cbo.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd19_fencei_cbo/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-20</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Backpressure</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">A decode stall propagating back to the p0 request</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd20_backpressure.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd20_backpressure.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd20_backpressure/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-21</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Commit</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">FTQ commit pointer and RAS commit stack</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd21_commit.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd21_commit.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd21_commit/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-22</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">SC on slot 1 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">SC reversing slot 1</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd22_sc_slot1.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd22_sc_slot1.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd22_sc_slot1/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-23</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Jump cut <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">A jump behind two conditionals</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd23_jump_cut.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd23_jump_cut.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd23_jump_cut/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-24</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Call in slot 1 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">A call in slot 1</td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd24_call_slot1.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd24_call_slot1.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600">waveform ↗</a></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd24_call_slot1/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap">description</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p style="margin: 0; font-size: 13px; color: #a9b4c0">Waveforms open in Surfer in the browser. <a href="https://uarchlabs.github.io/pacino/showcase/" style="color: #e8845a">Showcase Index →</a></p>
+</section>
 
-      <div class="placeholder-card">
-        <span class="placeholder-plus">+</span>
-        <span class="placeholder-text">next project · coming soon</span>
-      </div>
-    </section>
+<section aria-labelledby="qs" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="qs" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// quick start</h2>
+<div style="background: #161a20; border: 1px solid #353f4a; border-radius: 6px; overflow-x: auto">
+<div style="display: flex; gap: 8px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #2a3038; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a9b4c0">
+<span>~/pacino</span><span style="margin-left: auto">ubuntu 22.04</span>
+</div>
+<pre style="margin: 0; padding: 18px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.75; color: #e8ecf0"><span style="color: #a9b4c0">$</span> git clone --recurse-submodules https://github.com/uarchlabs/pacino
+<span style="color: #a9b4c0">$</span> cd pacino &amp;&amp; . tools/setup.sh
+<span style="color: #a9b4c0">$</span> tools/build_tools.sh        <span style="color: #a9b4c0"># about 30 minutes, mostly unattended</span>
+<span style="color: #a9b4c0">$</span> make -C examples/fe_demo view S=fd09_tage
+<span style="color: #a9b4c0">$</span> ./tools/regress.sh</pre>
+</div>
+<ul style="margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: #a9b4c0">
+<li>build_tools.sh asks where to install the cross compiler</li>
+<li>build_tools.sh stops if any system components are needed</li>
+<li>the demo make builds and launches a Surfer window</li>
+<li>the regression tests whether the development tools are ready, about 10 minutes</li>
+<li><a href="https://github.com/uarchlabs/pacino#quick-start" style="color: #e8845a">README.md</a></li>
+</ul>
+</section>
 
-    <!-- ABOUT -->
-    <section id="about" class="about">
-      <div>
-        <div class="about-label">// mission</div>
-        <div class="about-val">
-          Open source hardware design organization. Building processors and design flows
-          in the open, with AI co-design methods documented end-to-end — prompts, loops,
-          and rationale included.
-        </div>
-      </div>
-      <div>
-        <div class="about-label">// license</div>
-        <div class="about-val">
-          All RTL and tooling released under open source licenses.
-          Synthesizable, forkable, yours.
-        </div>
-      </div>
-    </section>
+<section id="projects" aria-labelledby="pj" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="pj" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// projects and tools</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
 
-  </main>
+<article style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600">pacino</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7fc59a">active</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #c4ccd5">8-issue out-of-order RISC-V core targeting RVA23S64. Frontend RTL complete: seven-predictor BPU, FTQ, IFU, I-cache, ITLB, page table walker, decode.</p>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 13px">
+<dt style="color: #a9b4c0">lang</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">SystemVerilog · Verilator</dd>
+<dt style="color: #a9b4c0">license</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">Apache-2.0 RTL · CC BY 4.0 docs</dd>
+</dl>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+<a href="https://github.com/uarchlabs/pacino" style="padding: 7px 11px; border: 1px solid #4a5563; border-radius: 4px">repo ↗</a>
+<a href="https://uarchlabs.github.io/pacino/" style="padding: 7px 11px; border: 1px solid #4a5563; border-radius: 4px">docs</a>
+<a href="#demos" style="padding: 7px 11px; border: 1px solid #4a5563; border-radius: 4px">demos</a>
+<a href="https://uarchlabs.github.io/pacino/sessions/" style="padding: 7px 11px; border: 1px solid #e8845a; border-radius: 4px; color: #e8845a; font-weight: 600">IA task browser</a>
+</div>
+</article>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-text">uarchlabs · open source hardware</span>
-    <a class="footer-link" href="https://github.com/uarchlabs" target="_blank" rel="noopener">github.com/uarchlabs ↗</a>
-    <a class="footer-link" href="https://www.linkedin.com/in/jeff-nye-21353926" target="_blank" rel="noopener">linkedin ↗</a>
-  </footer>
+<article style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600">ticfinder</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a9b4c0">tool</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #c4ccd5">Finds the recurring prose constructions that cluster in LLM-generated text, so a human can decide what to cut. Every uarchlabs post is run through it, waivers committed.</p>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 13px">
+<dt style="color: #a9b4c0">lang</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">Python · spaCy</dd>
+<dt style="color: #a9b4c0">license</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">Apache-2.0</dd>
+</dl>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+<a href="https://github.com/uarchlabs/ticfinder" style="padding: 7px 11px; border: 1px solid #4a5563; border-radius: 4px">repo ↗</a>
+</div>
+</article>
 
+<article style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px">
+<h3 style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 18px; font-weight: 600">cachegen</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a9b4c0">tool</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #c4ccd5">Cache generator: parameterized RTL plus a C++ functional model and test generator. Reference example is a 1 MB 4-way cache with tree-PLRU.</p>
+<dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; font-size: 13px">
+<dt style="color: #a9b4c0">lang</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">Verilog · C++</dd>
+<dt style="color: #a9b4c0">license</dt><dd style="margin: 0; font-family: 'IBM Plex Mono', monospace">Apache-2.0</dd>
+</dl>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+<a href="https://github.com/uarchlabs/cachegen" style="padding: 7px 11px; border: 1px solid #4a5563; border-radius: 4px">repo ↗</a>
+</div>
+</article>
+
+</div>
+</section>
+
+<section id="demos" aria-labelledby="sc" style="display: flex; flex-direction: column; gap: 18px">
+<h2 id="sc" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// demo releases</h2>
+<div style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; padding: 26px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start">
+<div style="display: flex; flex-direction: column; gap: 8px; max-width: 620px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #a9b4c0">release 01 · 2026-11</div>
+<h3 style="margin: 0; font-size: 24px; font-weight: 600">Theory of operation - Pacino Frontend</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #c4ccd5">Twenty-four test cases illustrating major frontend behavior. Waveforms, diagrams and walk-throughs.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px">
+<a href="https://uarchlabs.github.io/pacino/showcase/fe_demo/demo_explainer/" style="padding: 9px 13px; border-radius: 4px; background: #e8845a; color: #161a20; font-weight: 600">read the explainer</a>
+<a href="https://github.com/uarchlabs/pacino/tree/main/examples/fe_demo" style="padding: 9px 13px; border: 1px solid #4a5563; border-radius: 4px">source ↗</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<section id="sessions" aria-labelledby="rc" style="display: flex; flex-direction: column; gap: 16px">
+<h2 id="rc" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// IA task browser</h2>
+<div style="background: #2a3038; border: 1px solid #353f4a; border-radius: 6px; padding: 26px; display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: center; justify-content: space-between">
+<div style="display: flex; flex-direction: column; gap: 10px; flex: 1 1 420px">
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #c4ccd5">IA tasks include the prompt, results and run time stats. Tasks are grouped by unit. The task browser allows search and query. Discussions of results are found in the blog articles.</p>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0">latest: <span id="ia-latest">DOC-007 · 2026-10-19</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 28px; font-family: 'IBM Plex Mono', monospace">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-total">242</span><span style="font-size: 12px; color: #a9b4c0">IA tasks</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-complete">226</span><span style="font-size: 12px; color: #a9b4c0">complete</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-abandoned">12</span><span style="font-size: 12px; color: #a9b4c0">abandoned</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600">Jun–Nov</span><span style="font-size: 12px; color: #a9b4c0">2026</span></div>
+</div>
+<a href="https://uarchlabs.github.io/pacino/sessions/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 9px 13px; border-radius: 4px; background: #e8845a; color: #161a20; font-weight: 600">open the IA task browser</a>
+</div>
+</section>
+
+<section aria-labelledby="bl" style="display: flex; flex-direction: column; gap: 14px">
+<h2 id="bl" style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #e8845a">// latest from the blog</h2>
+<ul id="blog-list" style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #353f4a">
+<li style="border-bottom: 1px solid #353f4a">
+<a href="https://uarchlabs.github.io/blog/one-or-two-prediction-slots-the-last-front-end-debt-and-a-csr-definition/" style="display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 14px 0; align-items: baseline">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; min-width: 96px">2026-11-02</span>
+<span style="font-size: 16px; flex: 1 1 360px">One or Two Prediction Slots, the Last Front-End Debt and a CSR Definition</span>
+</a>
+</li>
+<li style="border-bottom: 1px solid #353f4a">
+<a href="https://uarchlabs.github.io/blog/closing-predictor-technical-debt-in-lp-tage-and-sc/" style="display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 14px 0; align-items: baseline">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; min-width: 96px">2026-10-26</span>
+<span style="font-size: 16px; flex: 1 1 360px">Closing Predictor Technical Debt in LP, TAGE and SC</span>
+</a>
+</li>
+<li style="border-bottom: 1px solid #353f4a">
+<a href="https://uarchlabs.github.io/blog/branch-prediction-cluster-simulation-and-mutation-based-verification/" style="display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 14px 0; align-items: baseline">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; min-width: 96px">2026-10-19</span>
+<span style="font-size: 16px; flex: 1 1 360px">Branch Prediction Cluster Simulation and Mutation-based Verification</span>
+</a>
+</li>
+<li style="border-bottom: 1px solid #353f4a">
+<a href="https://uarchlabs.github.io/blog/branch-prediction-cluster-build/" style="display: flex; flex-wrap: wrap; gap: 4px 20px; padding: 14px 0; align-items: baseline">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; min-width: 96px">2026-10-12</span>
+<span style="font-size: 16px; flex: 1 1 360px">Branch Prediction Cluster Build</span>
+</a>
+</li>
+</ul>
+<a href="https://uarchlabs.github.io/blog/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #e8845a">all <span id="blog-total">27</span> posts →</a>
+</section>
+
+</main>
+
+<footer style="border-top: 1px solid #353f4a; background: #1c2128">
+<div style="max-width: 1080px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0">
+<span>uarchlabs · open source hardware · © 2026</span>
+<span style="display: flex; flex-wrap: wrap; gap: 8px 20px">
+<a href="https://uarchlabs.com/" style="color: #a9b4c0">uarchlabs.com</a>
+<a href="https://uarchlabs.github.io/blog/" style="color: #a9b4c0">blog</a>
+<a href="https://github.com/uarchlabs" style="color: #a9b4c0">github</a>
+<a href="https://www.linkedin.com/company/uarchlabs" style="color: #a9b4c0">linkedin</a>
+</span>
+</div>
+</footer>
+
+</div>
+<script>
+/* Live data. The HTML above holds the values as of 2026-11-05; each block
+   below replaces them only when its file reads and parses. */
+(function () {
+  "use strict";
+  var ACCENT = "#e8845a", GREEN = "#7fc59a";
+
+  function text(id, v) {
+    var el = document.getElementById(id);
+    if (el && v !== undefined && v !== null) el.textContent = String(v);
+  }
+
+  /* Blog: the four newest posts and the total, from /posts.json. */
+  fetch("/posts.json").then(function (r) {
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(function (d) {
+    var ul = document.getElementById("blog-list");
+    var tmpl = ul && ul.querySelector("li");
+    if (!tmpl || !Array.isArray(d.posts) || d.posts.length === 0) return;
+    var items = d.posts.slice(0, 4).map(function (p) {
+      var li = tmpl.cloneNode(true);
+      var a = li.querySelector("a"), s = li.querySelectorAll("span");
+      a.href = p.url;
+      s[0].textContent = p.date;
+      s[1].textContent = p.title;
+      return li;
+    });
+    ul.replaceChildren.apply(ul, items);
+    text("blog-total", d.total);
+  }).catch(function () {});
+
+  /* IA tasks: session_count and summary sit in the first few KB of
+     sessions.json (pacino tools/gen_sessions.py). Read only that much. */
+  function extractObject(s, key) {
+    var i = s.indexOf('"' + key + '"');
+    if (i < 0) return null;
+    i = s.indexOf("{", i);
+    if (i < 0) return null;
+    var depth = 0, inStr = false;
+    for (var j = i; j < s.length; j++) {
+      var c = s[j];
+      if (inStr) {
+        if (c === "\\") j++;
+        else if (c === '"') inStr = false;
+      } else if (c === '"') inStr = true;
+      else if (c === "{") depth++;
+      else if (c === "}" && --depth === 0) return JSON.parse(s.slice(i, j + 1));
+    }
+    return null;
+  }
+
+  var HEAD_BYTES = 16384;
+  fetch("/pacino/sessions.json", { headers: { Range: "bytes=0-" + (HEAD_BYTES - 1) } })
+    .then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      var reader = r.body.getReader(), dec = new TextDecoder(), buf = "";
+      function pump() {
+        return reader.read().then(function (x) {
+          if (!x.done) buf += dec.decode(x.value, { stream: true });
+          if (x.done || buf.length >= HEAD_BYTES) {
+            if (!x.done) reader.cancel();
+            return buf;
+          }
+          return pump();
+        });
+      }
+      return pump();
+    }).then(function (s) {
+      var m = s.match(/"session_count"\s*:\s*(\d+)/);
+      var sum = extractObject(s, "summary");
+      if (!m || !sum || !sum.by_status) return;
+      text("ia-total", m[1]);
+      text("ia-complete", sum.by_status.complete || 0);
+      text("ia-abandoned", sum.by_status.abandoned || 0);
+      var l = sum.latest && sum.latest[0];
+      if (l && l.id && l.date) text("ia-latest", l.id + " · " + l.date);
+    }).catch(function () {});
+
+  /* Status boxes, from /status.json. */
+  var WORDS = { done: "complete", active: "in progress", planned: "planned" };
+  fetch("/status.json").then(function (r) {
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  }).then(function (d) {
+    (d.tracks || []).forEach(function (t) {
+      var box = document.getElementById("trk-" + t.id);
+      if (!box || !WORDS[t.state]) return;
+      var mk = box.querySelector(".mk"), st = box.querySelector(".st");
+      if (mk) {
+        mk.textContent = t.state === "done" ? "●" : "▶";
+        mk.style.color = t.state === "done" ? GREEN : ACCENT;
+      }
+      if (st) st.textContent = WORDS[t.state];
+    });
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>
-

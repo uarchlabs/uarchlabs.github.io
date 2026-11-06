@@ -15,6 +15,8 @@ Built with Jekyll. GitHub Pages rebuilds the site on every push to `main`.
 - `img/` - site images (banner, profile)
 - `_config.yml` - site config; posts are served at `/blog/:title/`
 - `_site/` - generated build output, do not edit (gitignored)
+- `status.json` - the shared project status, edited by hand, read by
+  both uarchlabs.github.io and uarchlabs.com
 
 ## Adding or editing a post
 

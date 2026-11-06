@@ -1,0 +1,28 @@
+{
+  "tracks": [
+    { "id":    "frontend_rtl",
+      "label": "Frontend RTL",
+      "state": "done"
+    },
+    { "id":    "docs",
+      "label": "Docs and showcase",
+      "state": "active"
+    },
+    { "id":    "formal",
+      "label": "Formal",
+      "state": "active"
+    },
+    { "id":    "performance",
+      "label": "Performance",
+      "state": "active"
+    },
+    { "id":    "physical_design",
+      "label": "Physical design",
+      "state": "active"
+    },
+    { "id":    "backend",
+      "label": "Backend",
+      "state": "planned"
+    }
+  ]
+}
