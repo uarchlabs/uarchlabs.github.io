@@ -12,11 +12,12 @@
 body{margin:0;background:#21272e}
 a{color:#e8ecf0;text-decoration:none}
 a:hover{color:#e8845a}
-/* Operations table: at phone width drop "What it shows" and shorten the
-   button labels (waveform -> wave, description -> desc) so the buttons
-   stay inside the scroll box */
+/* Operations table: below 700px drop "What it shows", shorten the
+   Waveform/Description headers and button labels (wave, desc), tighten
+   the cell padding, hide the "2-slot" tags and let the Demo cell wrap, so
+   the table fits its scroll box. !important overrides the inline styles */
 .lbl-short{display:none}
-@media (max-width:599.98px){.ops-shows,.lbl-long{display:none}.lbl-short{display:inline}}
+@media (max-width:699.98px){.ops-shows,.lbl-long{display:none}.lbl-short{display:inline}#operations th,#operations td{padding:8px 8px!important}.ops-tag{display:none}#operations td:nth-child(2){white-space:normal!important}}
 </style>
 <script data-goatcounter="https://uarchlabs.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -79,8 +80,8 @@ a:hover{color:#e8845a}
 <th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">FD</th>
 <th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">Demo</th>
 <th scope="col" class="ops-shows" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">What it shows</th>
-<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">Waveform</th>
-<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0">Description</th>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0"><span class="lbl-long">Waveform</span><span class="lbl-short">Wave</span></th>
+<th scope="col" style="position: sticky; top: 0; background: #2a3038; padding: 10px 14px; border-bottom: 1px solid #4a5563; text-align: left; font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #a9b4c0"><span class="lbl-long">Description</span><span class="lbl-short">Desc</span></th>
 </tr>
 </thead>
 <tbody>
@@ -100,7 +101,7 @@ a:hover{color:#e8845a}
 </tr>
 <tr>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-03</td>
-<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Two branches <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Two branches <span class="ops-tag" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
 <td class="ops-shows" style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">Two branches in one prediction block</td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd03_two_branch.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd03_two_branch.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600"><span class="lbl-long">waveform</span><span class="lbl-short">wave</span> ↗</a></td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd03_two_branch/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap"><span class="lbl-long">description</span><span class="lbl-short">desc</span></a></td>
@@ -233,21 +234,21 @@ a:hover{color:#e8845a}
 </tr>
 <tr>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-22</td>
-<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">SC on slot 1 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">SC on slot 1 <span class="ops-tag" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
 <td class="ops-shows" style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">SC reversing slot 1</td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd22_sc_slot1.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd22_sc_slot1.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600"><span class="lbl-long">waveform</span><span class="lbl-short">wave</span> ↗</a></td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd22_sc_slot1/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap"><span class="lbl-long">description</span><span class="lbl-short">desc</span></a></td>
 </tr>
 <tr>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-23</td>
-<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Jump cut <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Jump cut <span class="ops-tag" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
 <td class="ops-shows" style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">A jump behind two conditionals</td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd23_jump_cut.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd23_jump_cut.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600"><span class="lbl-long">waveform</span><span class="lbl-short">wave</span> ↗</a></td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd23_jump_cut/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap"><span class="lbl-long">description</span><span class="lbl-short">desc</span></a></td>
 </tr>
 <tr>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #a9b4c0; white-space: nowrap">FD-24</td>
-<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Call in slot 1 <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
+<td style="padding: 10px 14px; border-bottom: 1px solid #353f4a; white-space: nowrap">Call in slot 1 <span class="ops-tag" style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #e8845a; margin-left: 6px">2-slot</span></td>
 <td class="ops-shows" style="padding: 10px 14px; border-bottom: 1px solid #353f4a; color: #c4ccd5">A call in slot 1</td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://app.surfer-project.org/?load_url=https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd24_call_slot1.fst&amp;startup_commands=run_command_file_from_url%20https%3A%2F%2Fuarchlabs.github.io%2Fpacino-waves%2Ffd24_call_slot1.sucl" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap; color: #e8845a; border-color: #e8845a; font-weight: 600"><span class="lbl-long">waveform</span><span class="lbl-short">wave</span> ↗</a></td>
 <td style="padding: 10px 14px; border-bottom: 1px solid #353f4a"><a target="_blank" rel="noopener" href="https://uarchlabs.github.io/pacino/showcase/fe_demo/fd24_call_slot1/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 5px 10px; border: 1px solid #4a5563; border-radius: 4px; white-space: nowrap"><span class="lbl-long">description</span><span class="lbl-short">desc</span></a></td>
@@ -363,7 +364,7 @@ a:hover{color:#e8845a}
 <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-total">242</span><span style="font-size: 12px; color: #a9b4c0">IA tasks</span></div>
 <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-complete">226</span><span style="font-size: 12px; color: #a9b4c0">complete</span></div>
 <div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-abandoned">12</span><span style="font-size: 12px; color: #a9b4c0">abandoned</span></div>
-<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-months">Mar–Nov</span><span style="font-size: 12px; color: #a9b4c0" id="ia-years">2026</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 30px; font-weight: 600" id="ia-months">Jun–Nov</span><span style="font-size: 12px; color: #a9b4c0" id="ia-years">2026</span></div>
 </div>
 <a href="https://uarchlabs.github.io/pacino/sessions/" style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; padding: 9px 13px; border-radius: 4px; background: #e8845a; color: #161a20; font-weight: 600">open the IA task browser</a>
 </div>
@@ -492,22 +493,22 @@ a:hover{color:#e8845a}
       text("ia-abandoned", sum.by_status.abandoned || 0);
       var l = sum.latest && sum.latest[0];
       if (l && l.id && l.date) text("ia-latest", l.id + " · " + l.date);
-      var r = dateRange(sum.first_date, sum.last_date);
+      var r = dateRange(sum.last_date);
       if (r) { text("ia-months", r.months); text("ia-years", r.years); }
     }).catch(function () {});
 
-  /* "2026-03-22", "2026-11-05" -> { months: "Mar–Nov", years: "2026" }.
-     Different years -> "2026–2027". Null if either date is unreadable. */
-  function dateRange(first, last) {
+  /* The range starts at Jun 2026 (fixed); the end month and year come
+     from summary.last_date. "2026-11-05" -> { months: "Jun–Nov",
+     years: "2026" }; a later year -> "2026–2027". Null if unreadable. */
+  function dateRange(last) {
     var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var re = /^(\d{4})-(\d{2})-\d{2}/;
-    var a = re.exec(String(first || "")), b = re.exec(String(last || ""));
-    if (!a || !b || !MON[a[2] - 1] || !MON[b[2] - 1]) return null;
-    var m1 = MON[a[2] - 1], m2 = MON[b[2] - 1];
+    var b = /^(\d{4})-(\d{2})-\d{2}/.exec(String(last || ""));
+    if (!b || !MON[b[2] - 1]) return null;
+    var y1 = "2026", m1 = "Jun", m2 = MON[b[2] - 1];
     return {
-      months: a[1] === b[1] && m1 === m2 ? m1 : m1 + "–" + m2,
-      years: a[1] === b[1] ? a[1] : a[1] + "–" + b[1]
+      months: b[1] === y1 && m1 === m2 ? m1 : m1 + "–" + m2,
+      years: b[1] === y1 ? y1 : y1 + "–" + b[1]
     };
   }
 
