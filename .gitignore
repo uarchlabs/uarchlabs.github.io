@@ -9,3 +9,5 @@ Thumbs.db
 .bundle/
 vendor/
 _site/
+
+versions
