@@ -7,14 +7,6 @@ series: "Frontend Series"
 excerpt: "the frontend RTL, demos and specs, release fe-1.0.0"
 copyright: "Copyright 2026 Jeff Nye"
 ---
----
-layout: post
-title: "The Pacino Frontend RTL Is Complete"
-author: Jeff Nye
-date: 2026-11-05
-excerpt: "the frontend RTL, demos and specs, released as fe-1.0.0"
-copyright: "Copyright 2026 Jeff Nye"
----
 <!-- SPDX-License-Identifier: CC-BY-4.0                        -->
 <!-- Copyright (c) 2026 Jeff Nye, uarchlabs.com                -->
 <!-- SPDX-FileCopyrightText: 2026 Jeff Nye <jeff@uarchlabs.com> -->
