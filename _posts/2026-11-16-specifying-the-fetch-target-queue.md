@@ -54,7 +54,7 @@ FTQ entries contain state that allows the predicted path to be corrected after t
 
 The diagram shows the position of the FTQ in Pacino.
 
-![FTQ boundaries](blogs/diagrams/blog_fe_1_ftq_boundary.svg)
+![FTQ boundaries](/assets/diagrams/blog_fe_1_ftq_boundary.svg)
 
 *The FTQ's boundaries to the BPU, the IFU and the backend at the close of
 the range. Edges and fields drawn in orange were added in this session.*
@@ -127,7 +127,7 @@ BP-102 added 30 rollback checks to `tb_bp_cluster`, verified with the same schem
 
 Each FTB slot records the position of its branch within the 32-byte fetch block. `FTB_BR_POS_BITS` of 3 divides the block into eight 4-byte positions. RVA23 mandates the C extension [3], so two RVC branches can occupy the same aligned 4-byte word and receive the same position. The FTB and uBTB could record only one of them, and the position reported by the backend at resolution could not be mapped to a single slot.
 
-![In-block branch positions](blogs/diagrams/blog_fe_1_rvc_positions.svg)
+![In-block branch positions](/assets/diagrams/blog_fe_1_rvc_positions.svg)
 
 *Two RVC branches in one aligned 4-byte word. With 4-byte positions they share position 1; with 2-byte positions, after BP-099, each has its own.*
 
